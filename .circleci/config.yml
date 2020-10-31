@@ -1,14 +1,25 @@
-version: 2.1
-jobs:
-  deploy-job:
-    machine:
-      enabled: true
-    steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "82:fa:51:2b:97:31:d6:5e:04:5b:6f:9d:c9:1e:47:85"
-      - run:
-        -nam: Comando ssh
-        command:
-          ssh $SSH_USER@$SSH_HOST "pwd"
-        
+version: 2
+
+ jobs:
+   build:
+     #...
+   deploy:
+     machine:
+       enabled: true
+     steps:
+       - run:
+           name: Deploy Over SSH
+           command: |
+             ssh $SSH_USER@$SSH_HOST "pwd"
+
+ workflows:
+   version: 2
+   build-and-deploy:
+     jobs:
+       - build
+       - deploy:
+           requires:
+             - build # only deploy once build job has completed
+           filters:
+             branches:
+               only: master # only deploy on the master branch
