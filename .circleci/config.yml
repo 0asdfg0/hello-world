@@ -4,4 +4,9 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "SO:ME:FIN:G:ER:PR:IN:T"
+            - "82:fa:51:2b:97:31:d6:5e:04:5b:6f:9d:c9:1e:47:85"
+      -run:
+        -nam: Comando ssh
+        command:
+          ssh $SSH_USER@$SSH_HOST "pwd"
+        
