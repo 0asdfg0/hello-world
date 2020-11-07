@@ -10,7 +10,7 @@
        - run:
            name: Deploy Over SSH
            command: |
-             ssh niconam2009@35.225.73.98 "pwd"
+             ssh $name@$host "pwd"
  workflows:
    version: 2
    build-and-deploy:
